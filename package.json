@@ -26,10 +26,7 @@
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.9",
-    "server": "file:"
-  },
-  "devDependencies": {
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3"
+    "server": "file:",
+    "tsup": "^8.4.0"
   }
 }
