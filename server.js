@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth");
 const applicationRoute = require('./routes/applicationRoute');
 
 const testimonialUserRoutes  = require('./routes/testimonialRoutes');
+const mediaRoutes = require('./routes/mediaRoute');
 
 const teamMemberRoutes = require('./routes/teamRoute')
 
@@ -46,6 +47,8 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/form', formRoutes);
 
 app.use("/api/testimonialUsers", testimonialUserRoutes);
+
+app.use("/api/media", mediaRoutes);
 
 app.use("/api/teamMembers", teamMemberRoutes )
 
