@@ -34,6 +34,8 @@ const createTeamMember = async (req, res) => {
 
         try {
             const { name, position } = req.body;
+
+            console.log("data", name, position); // Log the uploaded file information
             if (!name || !position) {
                 return res.status(400).json({ message: 'Name and position are required' });
             }

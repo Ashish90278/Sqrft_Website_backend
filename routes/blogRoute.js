@@ -19,7 +19,6 @@ router.get("/:id", getBlogById); // Assuming you have a function to get a single
 router.post("/",
     upload.fields([
         { name: "image", maxCount: 1 },
-        { name: "images", maxCount: 5 },
     ]),
     createBlog); // Multer handles image uploads
 router.put("/:id", updateBlog);

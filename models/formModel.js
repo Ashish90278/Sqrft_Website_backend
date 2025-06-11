@@ -5,6 +5,7 @@ const FormSchema = new mongoose.Schema({
   category: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String },
+  aboutBuilder: { type: String },
   address: { type: String },
   area: { type: String },
   price: { type: Number },
@@ -17,6 +18,8 @@ const FormSchema = new mongoose.Schema({
   floorPlans: { type: [String], default: [] },
   images: { type: [String], default: [] },
   lotDimensions: { type: String },
+  reraNumber: { type: String },
+  disclaimer: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 
