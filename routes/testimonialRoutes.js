@@ -3,8 +3,6 @@ const multer = require("multer");
 const { storage } = require("../config/cloudinaryConfig");
 const upload = multer({ storage });
 
-
-
 const {
   getTestimonialUsers,
   createTestimonialUser,
@@ -15,11 +13,8 @@ const {
 const router = express.Router();
 
 router.get("/", getTestimonialUsers);
-router.post("/",
-  upload.fields([
-    { name: "image", maxCount: 1 }
-  ]),
-  createTestimonialUser); // Multer handles image uploads
+router.post("/", upload.single("image"), createTestimonialUser);
+// Multer handles image uploads
 router.put("/:id", updateTestimonialUser);
 router.delete("/:id", deleteTestimonialUser);
 

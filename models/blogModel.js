@@ -11,7 +11,15 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    content: {
+    para_1: {
+        type: String,
+        required: true,
+    },
+    para_2: {
+        type: String,
+        required: true,
+    },
+    Conclusion: {
         type: String,
         required: true,
     },

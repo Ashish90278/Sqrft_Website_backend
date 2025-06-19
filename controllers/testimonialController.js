@@ -28,30 +28,58 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter }).single('image');
 
 // Create TestimonialUser
+// const createTestimonialUser = async (req, res) => {
+//     upload(req, res, async (err) => {
+//         if (err) return res.status(400).json({ message: err.message });
+
+//         try {
+//             const { name, description, position } = req.body;
+//             if (!name || !description || !position) {
+//                 return res.status(400).json({ message: 'Name, description, and position are required' });
+//             }
+
+//             const imageUrl = req.file ? `/uploads/${req.file.filename}` : ''; // Store relative image path
+
+//             const newTestimonialUser = new TestimonialUser({ name, image: imageUrl, description, position });
+//             const savedTestimonialUser = await newTestimonialUser.save();
+
+//             res.status(201).json({
+//                 message: 'Testimonial created successfully',
+//                 testimonialUser: savedTestimonialUser,
+//             });
+//         } catch (error) {
+//             res.status(500).json({ message: 'Server error', error });
+//         }
+//     });
+// };
+
 const createTestimonialUser = async (req, res) => {
-    upload(req, res, async (err) => {
-        if (err) return res.status(400).json({ message: err.message });
+  try {
+    const { name, description, position } = req.body;
 
-        try {
-            const { name, description, position } = req.body;
-            if (!name || !description || !position) {
-                return res.status(400).json({ message: 'Name, description, and position are required' });
-            }
+    if (!req.file || !name || !description || !position) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
 
-            const imageUrl = req.file ? `/uploads/${req.file.filename}` : ''; // Store relative image path
+    const imageUrl = req.file.path;
 
-            const newTestimonialUser = new TestimonialUser({ name, image: imageUrl, description, position });
-            const savedTestimonialUser = await newTestimonialUser.save();
-
-            res.status(201).json({
-                message: 'Testimonial created successfully',
-                testimonialUser: savedTestimonialUser,
-            });
-        } catch (error) {
-            res.status(500).json({ message: 'Server error', error });
-        }
+    const newTestimonial = new Testimonial({
+      name,
+      description,
+      position,
+      image: imageUrl,
     });
+
+    await newTestimonial.save();
+
+    res.status(201).json({ message: "Testimonial created successfully", newTestimonial });
+  } catch (err) {
+    console.error("Create testimonial error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 };
+
+
 
 // Get all testimonials
 const getTestimonialUsers = async (req, res) => {

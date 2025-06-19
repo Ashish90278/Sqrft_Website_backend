@@ -51,22 +51,42 @@ exports.getApplicationById = async (req, res) => {
     }
 };
 
-// Delete an application by ID (DELETE)
+
 exports.deleteApplication = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const application = await Application.findByIdAndDelete(id);
+  console.log("Request params:", req.params);
 
-        if (!application) return res.status(404).json({ message: 'Application not found' });
+  try {
+    const { id } = req.params;
 
-        // Optionally delete resume from Cloudinary
-        if (application.resumeUrl) {
-            const publicId = application.resumeUrl.split('/').pop().split('.')[0];
-            await cloudinary.uploader.destroy(publicId);
-        }
-
-        res.status(200).json({ message: 'Application deleted successfully!' });
-    } catch (err) {
-        res.status(500).json({ message: 'Internal Server Error', error: err.message });
+    if (!id) {
+      return res.status(400).json({ message: 'ID is required' });
     }
+
+    const application = await Application.findByIdAndDelete(id);
+
+    if (!application) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    // Delete resume from Cloudinary if available
+    if (application.resumeUrl) {
+      try {
+        const urlParts = application.resumeUrl.split('/');
+        const filenameWithExt = urlParts[urlParts.length - 1];
+        const publicId = filenameWithExt.split('.')[0];
+
+        await cloudinary.uploader.destroy(publicId);
+      } catch (cloudErr) {
+        console.warn("Failed to delete from Cloudinary:", cloudErr.message);
+      }
+    }
+
+    return res.status(200).json({ message: 'Application deleted successfully!' });
+  } catch (err) {
+    console.error("Server error during delete:", err);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      error: err.message,
+    });
+  }
 };

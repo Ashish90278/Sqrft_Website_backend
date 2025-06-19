@@ -12,9 +12,11 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'FormUploads',
     resource_type: 'auto', // Automatically detect the resource type (image, video, etc.)
-    public_id: (req, file) => file.filename,
+    // public_id: (req, file) => file.filename,
+    public_id: (req, file) => file.originalname.split('.')[0],
     format: (req, file) => file.originalname.split('.').pop(), // Use the original file format
   },
 });
 
 module.exports = { cloudinary, storage };
+
