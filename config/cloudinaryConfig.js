@@ -1,11 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-// cloudinary.config({
-//   cloud_name: 'MasterclassEdutech',
-//   api_key: '537277672486572',
-//   api_secret: 'QfhH5oVAL1gmkSagDzxMOWdN_Sc'
-// });
+
 cloudinary.config({
   cloud_name: 'drvphnwxq',
   api_key: '745563548647795',
