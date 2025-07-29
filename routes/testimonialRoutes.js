@@ -1,8 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const { storage } = require("../config/cloudinaryConfig");
-const upload = multer({ storage });
-
 const {
   getTestimonialUsers,
   createTestimonialUser,
@@ -11,6 +9,7 @@ const {
 } = require("../controllers/testimonialController");
 
 const router = express.Router();
+const upload = multer({ storage });
 
 router.get("/", getTestimonialUsers);
 router.post("/", upload.single("image"), createTestimonialUser);

@@ -36,7 +36,7 @@ const createMediaFile = async (req, res) => {
       return res.status(400).json({ message: "No image file uploaded" });
     }
 
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const imageUrl = req.file.filename;
 
     const newMediaFile = new Media({ image: imageUrl });
     const savedMediaFile = await newMediaFile.save();

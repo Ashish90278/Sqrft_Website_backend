@@ -61,9 +61,9 @@ const createTestimonialUser = async (req, res) => {
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    const imageUrl = req.file.path;
+    const imageUrl = req.file.filename;
 
-    const newTestimonial = new Testimonial({
+    const newTestimonial = new TestimonialUser({
       name,
       description,
       position,

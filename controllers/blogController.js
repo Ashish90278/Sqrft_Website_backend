@@ -32,8 +32,6 @@ const upload = multer({ storage, fileFilter }).single("image");
 // Create a blog post
 
 const createBlog = async (req, res) => {
-  upload(req, res, async (err) => {
-    if (err) return res.status(400).json({ message: err.message });
 
     try {
       const { title, description, para_1, para_2, conclusion, writtenBy } =
@@ -54,7 +52,7 @@ const createBlog = async (req, res) => {
           });
       }
 
-      const image = req.file ? `/uploads/${req.file.filename}` : ""; // Store relative image path
+      const image = req.file.filename; // Store relative image path
 
       const newBlog = new Blog({
         title,
@@ -74,7 +72,7 @@ const createBlog = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: "Server error", error });
     }
-  });
+  
 };
 
 // Get all blog posts

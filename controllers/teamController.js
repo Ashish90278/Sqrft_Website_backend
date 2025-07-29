@@ -60,8 +60,6 @@ const upload = multer({ storage, fileFilter }).single('image');
 // };
 
 const createTeamMember = async (req, res) => {
-    console.log("req.body", req.body);
-    console.log("req.file", req.file);
     
   try {
 
@@ -71,7 +69,7 @@ const createTeamMember = async (req, res) => {
       return res.status(400).json({ message: 'Name and position are required' });
     }
 
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
+    const imageUrl = req.file.filename;
 
     const newTeamMember = new Team({ name, image: imageUrl, position });
     const savedTeamMember = await newTeamMember.save();

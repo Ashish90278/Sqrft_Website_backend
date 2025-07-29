@@ -138,5 +138,4 @@ const deleteForm = async (req, res) => {
     }
 };
 
-
 module.exports = { submitForm, getForms, deleteForm, getPropertiesDetails };
