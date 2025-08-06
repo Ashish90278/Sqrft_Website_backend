@@ -37,7 +37,6 @@ const blogSchema = new mongoose.Schema({
 }, {
     timestamps: true, // Adds createdAt and updatedAt timestamps
 });
-
 // Create the TestimonialUser model
 const Blog = mongoose.model('Blog', blogSchema);
 
