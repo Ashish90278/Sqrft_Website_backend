@@ -18,7 +18,7 @@ const FormSchema = new mongoose.Schema({
   floorPlans: { type: [String], default: [] },
   images: { type: [String], default: [] },
   lotDimensions: { type: String },
-  reraNumber: { type: String },
+  reraDetails: { type: String, default:"no" },
   disclaimer: { type: String },
   createdAt: { type: Date, default: Date.now },
 });

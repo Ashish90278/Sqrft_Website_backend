@@ -16,6 +16,8 @@ const submitForm = async (req, res) => {
             ...formData,
             images,
             floorPlans,
+            
+
         });
 
         const savedForm = await newForm.save();
